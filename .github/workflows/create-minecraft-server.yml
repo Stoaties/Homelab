@@ -1,0 +1,82 @@
+name: Creer un serveur minecraft
+on:
+  workflow_dispatch:
+    inputs:
+      server_name:
+        description: "Nom du serveur"
+        required: true
+        type: string
+      server_memory:
+        description: "Memoire vive du serveur"
+        required: true
+        type: choice
+        options:
+          - 1G
+          - 2G
+          - 4G
+          - 8G
+      server_version:
+        description: "Version du jeu pour le serveur (Latest par defaut)"
+        required: false
+        type: choice
+        options:
+          - "1.21"
+          - "1.20"
+          - "Beta 1.8"
+      admin_email:
+        description: "Email pour l'administration du serveur"
+        required: true
+        type: string
+
+  permissions:
+    contents: write
+    pull-requests: write
+
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: Find Next Available Port
+          id: get_port
+          run: |
+            MAX_PORT=$(grep -oP 'server_port\s*=\s*\K[0-9]+' terraform/vault/minecraft_servers.tf | sort -nr | head -n1)
+            if [ -z "$MAX_PORT" ]; then MAX_PORT=25564; fi
+            echo "next_port=$((MAX_PORT + 1))" >> $GITHUB_OUTPUT
+
+        - name: Render terramform server module
+          uses: cuchi/jinja2-action@v1.3.0
+          with:
+            template: terraform/templates/minecraft-server-module-template.jinja2
+            output_file: temp_server_module.tf
+            strict: true
+            variables: |
+              server_name=${{ github.event.inputs.server_name }}
+              server_memory=${{ github.event.inputs.server_memory }}
+              server_version=${{ github.event.inputs.server_version }}
+              server_port= {{ steps.get_port.outputs.next_port}}
+
+        - name: Append new server to minecraft_servers.tf
+          run: cat temp_server_module.tf  >> terraform/minecraft_servers
+
+        - name: Remove temporary file
+          run: rm temp_server_module.tf
+
+        - name: Output new server file in console
+          run: cat terraform/minecraft_servers.tf
+
+        - name: Create pull-resquest
+          uses: peter-evans/create-pull-request@v5
+          with:
+            title: "Deply Minecraft server: ${{ github.event.inputs.server_name }}."
+            branch: "mc_server_${{ github.event.inputs.server_name }}"
+            commit-message: "Add ${{ github.event.inputs.server_name }} on port ${{ steps.get_port.outputs.next_port."
+            body: |
+              ### New Minecraft Server Deployment
+              - **Name:** `${{ github.event.inputs.server_name }}`
+              - **Port:** `${{ steps.get_port.outputs.next_port }}`
+              - **RAM:** `${{ github.event.inputs.server_memory }}`
+              - **Version:** `${{ github.event.inputs.server_version }}`

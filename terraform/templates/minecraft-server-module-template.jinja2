@@ -1,0 +1,7 @@
+module "{{ server_name }}" {
+    source = "./modules/minecraft_server"
+    server_memory = {{ server_memory }}
+    server_version = "{{ server_version }}"
+    server_port = {{ server_port }}
+    email = {{ admin_email }}
+  }
