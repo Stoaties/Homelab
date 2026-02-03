@@ -56,7 +56,8 @@ jobs:
             server_name=${{ github.event.inputs.server_name }}
             server_memory=${{ github.event.inputs.server_memory }}
             server_version=${{ github.event.inputs.server_version }}
-            server_port= {{ steps.get_port.outputs.next_port}}
+            server_port= ${{ steps.get_port.outputs.next_port }}
+            admin_email= ${{ github.event.inputs.admin_email }}
 
       - name: Append new server to minecraft_servers.tf
         run: cat temp_server_module.tf  >> terraform/minecraft_servers
