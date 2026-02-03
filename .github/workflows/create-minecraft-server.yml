@@ -60,7 +60,7 @@ jobs:
             admin_email= ${{ github.event.inputs.admin_email }}
 
       - name: Append new server to minecraft_servers.tf
-        run: cat temp_server_module.tf  >> terraform/minecraft_servers
+        run: cat temp_server_module.tf  >> terraform/vault/minecraft_servers
 
       - name: Remove temporary file
         run: rm temp_server_module.tf
