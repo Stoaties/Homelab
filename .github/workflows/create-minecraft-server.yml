@@ -71,6 +71,7 @@ jobs:
       - name: Create pull-resquest
         uses: peter-evans/create-pull-request@v5
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           title: "Deply Minecraft server: ${{ github.event.inputs.server_name }}."
           branch: "mc_server_${{ github.event.inputs.server_name }}"
           commit-message: "Add ${{ github.event.inputs.server_name }} on port ${{ steps.get_port.outputs.next_port }}."
