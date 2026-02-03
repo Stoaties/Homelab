@@ -62,13 +62,8 @@ jobs:
       - name: Append new server to minecraft_servers.tf
         run: cat temp_server_module.tf  >> terraform/vault/minecraft_servers
 
-<<<<<<< HEAD
-        - name: Append new server to minecraft_servers.tf
-          run: cat temp_server_module.tf  >> terraform/minecraft_servers.tf
-=======
       - name: Remove temporary file
         run: rm temp_server_module.tf
->>>>>>> 44e5c4b94034549de09112b017c801aaad541f8a
 
       - name: Output new server file in console
         run: cat terraform/vault/minecraft_servers.tf
