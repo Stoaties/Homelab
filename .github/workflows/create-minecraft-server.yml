@@ -60,7 +60,7 @@ on:
               server_port= {{ steps.get_port.outputs.next_port}}
 
         - name: Append new server to minecraft_servers.tf
-          run: cat temp_server_module.tf  >> terraform/minecraft_servers
+          run: cat temp_server_module.tf  >> terraform/minecraft_servers.tf
 
         - name: Remove temporary file
           run: rm temp_server_module.tf
