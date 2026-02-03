@@ -72,7 +72,7 @@ jobs:
         with:
           title: "Deply Minecraft server: ${{ github.event.inputs.server_name }}."
           branch: "mc_server_${{ github.event.inputs.server_name }}"
-          commit-message: "Add ${{ github.event.inputs.server_name }} on port ${{ steps.get_port.outputs.next_port."
+          commit-message: "Add ${{ github.event.inputs.server_name }} on port ${{ steps.get_port.outputs.next_port }}."
           body: |
             ### New Minecraft Server Deployment
             - **Name:** `${{ github.event.inputs.server_name }}`
