@@ -66,7 +66,7 @@ jobs:
         run: rm temp_server_module.tf
 
       - name: Output new server file in console
-        run: cat terraform/minecraft_servers.tf
+        run: cat terraform/vault/minecraft_servers.tf
 
       - name: Create pull-resquest
         uses: peter-evans/create-pull-request@v5
