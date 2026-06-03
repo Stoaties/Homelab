@@ -15,13 +15,8 @@ resource "proxmox_vm_qemu" "talos_vm" {
   # Memory
   memory = var.memory
   
-  # BIOS
+  # BIOS - UEFI for Talos
   bios = "ovmf"
-  
-  # EFI Disk
-  efidisk {
-    storage = var.storage
-  }
   
   # Enable QEMU agent
   agent = 1
