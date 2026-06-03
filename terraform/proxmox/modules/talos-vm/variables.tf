@@ -24,8 +24,8 @@ variable "memory" {
 }
 
 variable "disk_size" {
-  description = "Disk size (e.g., '50G')"
-  type        = string
+  description = "Disk size in GB"
+  type        = number
 }
 
 variable "ip_address" {

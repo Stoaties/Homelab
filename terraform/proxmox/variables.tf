@@ -60,9 +60,9 @@ variable "control_plane_memory" {
 }
 
 variable "control_plane_disk_size" {
-  description = "Disk size for control plane nodes"
-  type        = string
-  default     = "50G"
+  description = "Disk size in GB for control plane nodes"
+  type        = number
+  default     = 50
 }
 
 variable "control_plane_ips" {
@@ -91,9 +91,9 @@ variable "worker_memory" {
 }
 
 variable "worker_disk_size" {
-  description = "Disk size for worker nodes"
-  type        = string
-  default     = "100G"
+  description = "Disk size in GB for worker nodes"
+  type        = number
+  default     = 100
 }
 
 variable "worker_ips" {

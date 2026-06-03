@@ -12,7 +12,7 @@ terraform {
     organization = "homelabStoaties"  # Updated to your org name
 
     workspaces {
-      name = "homelab-proxmox"
+      name = "Homelab"
     }
   }
   
