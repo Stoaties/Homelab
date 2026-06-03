@@ -44,7 +44,7 @@ variable "nameserver" {
 }
 
 variable "iso_file" {
-  description = "Path to Talos ISO"
+  description = "Proxmox datastore file ID for Talos ISO (e.g., 'local:iso/talos-amd64.iso')"
   type        = string
 }
 
