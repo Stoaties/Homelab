@@ -31,7 +31,7 @@ variable "nameserver" {
 variable "talos_iso_path" {
   description = "Path to Talos ISO in Proxmox storage"
   type        = string
-  default     = "local:iso/talos-amd64.iso"  # Update with actual path
+  default     = "local:iso/metal-amd64.iso"
 }
 
 variable "vm_storage" {
