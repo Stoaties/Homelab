@@ -6,7 +6,6 @@ resource "proxmox_vm_qemu" "talos_vm" {
 
   # Boot from ISO
   iso         = var.iso_file
-  boot        = "order=scsi0;ide2"
   
   # CPU
   cores   = var.cpu_cores
@@ -19,31 +18,23 @@ resource "proxmox_vm_qemu" "talos_vm" {
   # BIOS
   bios = "ovmf"
   
+  # EFI Disk
+  efidisk {
+    storage = var.storage
+  }
+  
   # Enable QEMU agent
   agent = 1
   
   # Boot on start
   onboot  = true
-  startup = "order=1"
   
   # Disk
-  disks {
-    scsi {
-      scsi0 {
-        disk {
-          size    = var.disk_size
-          storage = var.storage
-          iothread = true
-        }
-      }
-    }
-    ide {
-      ide2 {
-        cdrom {
-          iso = var.iso_file
-        }
-      }
-    }
+  disk {
+    type    = "scsi"
+    storage = var.storage
+    size    = var.disk_size
+    iothread = 1
   }
   
   # Network
