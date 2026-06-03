@@ -39,18 +39,9 @@ resource "proxmox_virtual_environment_vm" "talos_vm" {
 
   bios = "ovmf"
 
-  initialization {
-    ip_config {
-      ipv4 {
-        address = "${var.ip_address}/24"
-        gateway = var.gateway
-      }
-    }
-    
-    dns {
-      servers = [var.nameserver]
-    }
-  }
+  # REMOVED: initialization block - Talos doesn't use cloud-init
+  # Network configuration must be done via Talos config files
+  # See talos/scripts/generate-configs.sh
 
   cdrom {
     enabled = true

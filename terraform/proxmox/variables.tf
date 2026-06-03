@@ -22,6 +22,12 @@ variable "gateway" {
   default     = "10.0.0.1"
 }
 
+variable "subnet_mask" {
+  description = "Network subnet mask (CIDR bits)"
+  type        = number
+  default     = 16
+}
+
 variable "nameserver" {
   description = "DNS nameserver"
   type        = string
