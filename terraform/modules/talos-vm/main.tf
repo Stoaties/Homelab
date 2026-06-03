@@ -19,8 +19,8 @@ resource "proxmox_vm_qemu" "talos_vm" {
   # BIOS
   bios = "ovmf"
   
-  # Enable QEMU agent
-  agent = 1
+  # Disable QEMU agent (Talos doesn't include it)
+  agent = 0
   
   # Boot on start
   onboot  = true
@@ -53,9 +53,9 @@ resource "proxmox_vm_qemu" "talos_vm" {
     tag    = var.vlan_tag != -1 ? var.vlan_tag : null
   }
   
-  # IP Configuration (Static)
-  ipconfig0 = "ip=${var.ip_address}/24,gw=${var.gateway}"
-  nameserver = var.nameserver
+  # NOTE: IP configuration CANNOT be set here for Talos OS
+  # Talos doesn't use cloud-init. IPs must be configured in Talos machine configs
+  # See talos/scripts/generate-configs.sh and talos/*.yaml files
   
   # Tags
   tags = join(";", var.tags)
