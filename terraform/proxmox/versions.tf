@@ -9,7 +9,7 @@ terraform {
   }
 
   cloud {
-    organization = "your-org-name"  # Update with your Terraform Cloud org
+    organization = "homelabStoaties"  # Update with your Terraform Cloud org
 
     workspaces {
       name = "homelab-proxmox"
