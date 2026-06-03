@@ -6,8 +6,9 @@ resource "proxmox_virtual_environment_vm" "talos_vm" {
 
   on_boot = true
   
+  # Disable QEMU guest agent - Talos doesn't include it
   agent {
-    enabled = true
+    enabled = false
   }
 
   cpu {
