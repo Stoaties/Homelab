@@ -19,8 +19,8 @@ resource "proxmox_vm_qemu" "talos_vm" {
   # BIOS
   bios = "ovmf"
   
-  # Enable QEMU agent
-  agent = 1
+  # Disable QEMU agent (Talos doesn't include it)
+  agent = 0
   
   # Boot on start
   onboot  = true
