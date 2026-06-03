@@ -14,11 +14,13 @@
 # Login to Terraform Cloud: https://app.terraform.io/
 # Create organization (or use existing)
 # Create workspace: "homelab-proxmox"
+
+# IMPORTANT: Configure workspace settings:
+# Settings → General → Terraform Working Directory = "terraform/proxmox"
+
 # Add workspace variables:
 #   - proxmox_endpoint = "https://10.0.0.9:8006/api2/json"
 #   - proxmox_api_token = "root@pam!terraform=xxx..." (sensitive)
-
-# Update terraform/proxmox/versions.tf with your org name
 ```
 
 ### 2️⃣ Deploy VMs with Terraform (10 minutes)

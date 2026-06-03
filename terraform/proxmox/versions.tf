@@ -9,10 +9,13 @@ terraform {
   }
 
   cloud {
-    organization = "your-org-name"  # Update with your Terraform Cloud org
+    organization = "homelabStoaties"  # Updated to your org name
 
     workspaces {
       name = "homelab-proxmox"
     }
   }
+  
+  # NOTE: In Terraform Cloud workspace settings, set:
+  # Working Directory: terraform/proxmox
 }
