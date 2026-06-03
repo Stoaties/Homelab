@@ -1,6 +1,6 @@
 # Control Plane VMs
 module "control_plane" {
-  source = "../modules/talos-vm"
+  source = "./modules/talos-vm"
   count  = var.control_plane_count
 
   vm_name      = "talos-cp-${format("%02d", count.index + 1)}"
@@ -25,7 +25,7 @@ module "control_plane" {
 
 # Worker VMs
 module "worker" {
-  source = "../modules/talos-vm"
+  source = "./modules/talos-vm"
   count  = var.worker_count
 
   vm_name      = "talos-worker-${format("%02d", count.index + 1)}"
