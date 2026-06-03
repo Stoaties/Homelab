@@ -71,7 +71,7 @@ Add these variables in workspace settings:
 | Variable Name | Value | Sensitive |
 |--------------|-------|-----------|
 | `proxmox_endpoint` | `https://10.0.0.9:8006/api2/json` | No |
-| `proxmox_api_token` | `root@pam!terraform=xxx...` | **Yes** |
+| `proxmox_api_token` | `terraform-prov@pve!terraform-cloud=xxx...` | **Yes** |
 
 ### 2.3 Update Terraform Configuration
 

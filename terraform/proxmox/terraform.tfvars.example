@@ -2,8 +2,9 @@
 # Copy this to terraform.tfvars and customize for your environment
 # DO NOT commit terraform.tfvars to git!
 
-# proxmox_endpoint is set via Terraform Cloud workspace variable
+# proxmox_endpoint is set via Terraform Cloud workspace variable: https://10.0.0.9:8006/api2/json
 # proxmox_api_token is set via Terraform Cloud workspace variable (sensitive)
+#   Format: terraform-prov@pve!terraform-cloud=<your-secret-here>
 
 proxmox_node = "pve"  # Your Proxmox node name
 

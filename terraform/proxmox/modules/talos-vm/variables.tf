@@ -24,8 +24,8 @@ variable "memory" {
 }
 
 variable "disk_size" {
-  description = "Disk size (e.g., '50G')"
-  type        = string
+  description = "Disk size in GB"
+  type        = number
 }
 
 variable "ip_address" {
@@ -44,7 +44,7 @@ variable "nameserver" {
 }
 
 variable "iso_file" {
-  description = "Path to Talos ISO"
+  description = "Proxmox datastore file ID for Talos ISO (e.g., 'local:iso/talos-amd64.iso')"
   type        = string
 }
 

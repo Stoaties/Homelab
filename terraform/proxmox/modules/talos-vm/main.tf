@@ -1,72 +1,57 @@
-resource "proxmox_vm_qemu" "talos_vm" {
+resource "proxmox_virtual_environment_vm" "talos_vm" {
   name        = var.vm_name
-  vmid        = var.vm_id
-  target_node = var.target_node
-  desc        = "Talos OS node managed by Terraform"
+  vm_id       = var.vm_id
+  node_name   = var.target_node
+  description = "Talos OS node managed by Terraform"
 
-  # Boot from ISO
-  iso         = var.iso_file
-  boot        = "order=scsi0;ide2"
+  on_boot = true
   
-  # CPU
-  cores   = var.cpu_cores
-  sockets = 1
-  cpu     = "host"
-  
-  # Memory
-  memory = var.memory
-  
-  # BIOS
-  bios = "ovmf"
-  
-  # Disable QEMU agent (Talos doesn't include it)
-  agent = 0
-  
-  # Boot on start
-  onboot  = true
-  startup = "order=1"
-  
-  # Disk
-  disks {
-    scsi {
-      scsi0 {
-        disk {
-          size    = var.disk_size
-          storage = var.storage
-          iothread = true
-        }
-      }
-    }
-    ide {
-      ide2 {
-        cdrom {
-          iso = var.iso_file
-        }
-      }
-    }
+  # Disable QEMU guest agent - Talos doesn't include it
+  agent {
+    enabled = false
   }
-  
-  # Network
-  network {
-    model  = "virtio"
+
+  cpu {
+    cores = var.cpu_cores
+    type  = "host"
+  }
+
+  memory {
+    dedicated = var.memory
+  }
+
+  disk {
+    datastore_id = var.storage
+    file_format  = "raw"
+    interface    = "scsi0"
+    iothread     = true
+    size         = var.disk_size
+  }
+
+  network_device {
     bridge = var.network_bridge
-    tag    = var.vlan_tag != -1 ? var.vlan_tag : null
+    model  = "virtio"
+    vlan_id = var.vlan_tag != -1 ? var.vlan_tag : null
   }
-  
-  # IP Configuration (Static)
-  ipconfig0 = "ip=${var.ip_address}/24,gw=${var.gateway}"
-  nameserver = var.nameserver
-  
-  # Tags
-  tags = join(";", var.tags)
-  
-  # Lifecycle
+
+  operating_system {
+    type = "l26"  # Linux 2.6+ kernel
+  }
+
+  bios = "ovmf"
+
+  # REMOVED: initialization block - Talos doesn't use cloud-init
+  # Network configuration must be done via Talos config files
+  # See talos/scripts/generate-configs.sh
+
+  cdrom {
+    enabled = true
+    file_id = var.iso_file
+  }
+
   lifecycle {
     ignore_changes = [
-      # Ignore changes to network after creation
-      network,
-      # Ignore ISO changes after first boot
-      iso,
+      cdrom,
     ]
   }
 }

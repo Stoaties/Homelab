@@ -22,6 +22,12 @@ variable "gateway" {
   default     = "10.0.0.1"
 }
 
+variable "subnet_mask" {
+  description = "Network subnet mask (CIDR bits)"
+  type        = number
+  default     = 16
+}
+
 variable "nameserver" {
   description = "DNS nameserver"
   type        = string
@@ -31,7 +37,7 @@ variable "nameserver" {
 variable "talos_iso_path" {
   description = "Path to Talos ISO in Proxmox storage"
   type        = string
-  default     = "local:iso/talos-amd64.iso"  # Update with actual path
+  default     = "local:iso/metal-amd64.iso"
 }
 
 variable "vm_storage" {
@@ -60,9 +66,9 @@ variable "control_plane_memory" {
 }
 
 variable "control_plane_disk_size" {
-  description = "Disk size for control plane nodes"
-  type        = string
-  default     = "50G"
+  description = "Disk size in GB for control plane nodes"
+  type        = number
+  default     = 50
 }
 
 variable "control_plane_ips" {
@@ -91,9 +97,9 @@ variable "worker_memory" {
 }
 
 variable "worker_disk_size" {
-  description = "Disk size for worker nodes"
-  type        = string
-  default     = "100G"
+  description = "Disk size in GB for worker nodes"
+  type        = number
+  default     = 100
 }
 
 variable "worker_ips" {
