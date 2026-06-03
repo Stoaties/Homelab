@@ -1,0 +1,45 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# Talos
+talos/controlplane.yaml
+talos/worker.yaml
+talos/*.kubeconfig
+talos/talosconfig
+
+# Kubernetes
+*.kubeconfig
+kubeconfig
+*-kubeconfig.yaml
+
+# Secrets
+*.pem
+*.key
+*.crt
+secrets/
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
