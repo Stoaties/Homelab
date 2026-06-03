@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: homelab
+  namespace: argocd
+spec:
+  description: Homelab Infrastructure Applications
+  
+  # Source repositories
+  sourceRepos:
+    - '*'  # Allow all repositories (restrict in production)
+  
+  # Destination clusters and namespaces
+  destinations:
+    - namespace: '*'
+      server: https://kubernetes.default.svc
+  
+  # Cluster resource allow list
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  
+  # Namespace resource allow list
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  
+  # Roles for RBAC
+  roles:
+    - name: admin
+      description: Admin role for homelab project
+      policies:
+        - p, proj:homelab:admin, applications, *, homelab/*, allow
+      groups:
+        - homelab-admins

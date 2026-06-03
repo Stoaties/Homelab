@@ -1,0 +1,36 @@
+# Example terraform.tfvars file
+# Copy this to terraform.tfvars and customize for your environment
+# DO NOT commit terraform.tfvars to git!
+
+# proxmox_endpoint is set via Terraform Cloud workspace variable
+# proxmox_api_token is set via Terraform Cloud workspace variable (sensitive)
+
+proxmox_node = "pve"  # Your Proxmox node name
+
+# Network Configuration
+gateway    = "10.0.0.1"
+nameserver = "10.0.0.1"  # Or use 1.1.1.1, 8.8.8.8, etc.
+
+# Talos ISO - Download from https://github.com/siderolabs/talos/releases
+talos_iso_path = "local:iso/talos-amd64.iso"
+
+# Storage
+vm_storage = "local-lvm"  # or "local-zfs", "ceph", etc.
+
+# Network
+network_bridge = "vmbr0"
+vlan_tag       = -1  # Set to VLAN ID if needed, -1 for no VLAN
+
+# Control Plane Settings
+control_plane_count  = 3
+control_plane_cpu    = 2
+control_plane_memory = 4096  # MB
+control_plane_disk_size = "50G"
+control_plane_ips    = ["10.0.1.101", "10.0.1.102", "10.0.1.103"]
+
+# Worker Settings
+worker_count  = 2
+worker_cpu    = 4
+worker_memory = 8192  # MB
+worker_disk_size = "100G"
+worker_ips    = ["10.0.1.201", "10.0.1.202"]
