@@ -1,11 +1,11 @@
 output "vm_id" {
   description = "ID of the created VM"
-  value       = proxmox_vm_qemu.talos_vm.vmid
+  value       = proxmox_virtual_environment_vm.talos_vm.vm_id
 }
 
 output "vm_name" {
   description = "Name of the created VM"
-  value       = proxmox_vm_qemu.talos_vm.name
+  value       = proxmox_virtual_environment_vm.talos_vm.name
 }
 
 output "ip_address" {

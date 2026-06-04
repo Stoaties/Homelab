@@ -3,8 +3,8 @@ terraform {
 
   required_providers {
     proxmox = {
-      source  = "telmate/proxmox"
-      version = "~> 2.9.14"
+      source  = "bpg/proxmox"
+      version = ">= 0.50.0"
     }
   }
 
@@ -12,7 +12,7 @@ terraform {
     organization = "homelabStoaties"  # Updated to your org name
 
     workspaces {
-      name = "homelab-proxmox"
+      name = "Homelab"
     }
   }
   
