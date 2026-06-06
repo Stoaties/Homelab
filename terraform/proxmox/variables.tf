@@ -119,3 +119,9 @@ variable "vlan_tag" {
   type        = number
   default     = -1  # -1 means no VLAN
 }
+
+variable "cluster_endpoint" {
+  description = "Kubernetes API server endpoint (use first control plane DHCP IP after deployment)"
+  type        = string
+  default     = "https://10.0.0.185:6443"  # Update with actual first control plane IP after deployment
+}
