@@ -23,16 +23,12 @@ module "control_plane" {
   memory       = var.control_plane_memory
   disk_size    = var.control_plane_disk_size
   
-  ip_address   = var.control_plane_ips[count.index]
-  gateway      = var.gateway
-  nameserver   = var.nameserver
-  
-  iso_file     = var.talos_iso_path
-  storage      = var.vm_storage
+  iso_file       = var.talos_iso_path
+  storage        = var.vm_storage
   network_bridge = var.network_bridge
-  vlan_tag     = var.vlan_tag
+  vlan_tag       = var.vlan_tag
   
-  tags         = ["talos", "control-plane", "kubernetes"]
+  tags = ["talos", "control-plane", "kubernetes"]
 }
 
 # Generate Talos configuration files for workers
@@ -60,14 +56,10 @@ module "worker" {
   memory       = var.worker_memory
   disk_size    = var.worker_disk_size
   
-  ip_address   = var.worker_ips[count.index]
-  gateway      = var.gateway
-  nameserver   = var.nameserver
-  
-  iso_file     = var.talos_iso_path
-  storage      = var.vm_storage
+  iso_file       = var.talos_iso_path
+  storage        = var.vm_storage
   network_bridge = var.network_bridge
-  vlan_tag     = var.vlan_tag
+  vlan_tag       = var.vlan_tag
   
-  tags         = ["talos", "worker", "kubernetes"]
+  tags = ["talos", "worker", "kubernetes"]
 }
