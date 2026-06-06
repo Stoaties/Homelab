@@ -10,14 +10,7 @@ machine:
     hostname: ${hostname}
     interfaces:
       - interface: eth0
-        dhcp: false
-        addresses:
-          - ${ip_address}/24
-        routes:
-          - network: 0.0.0.0/0
-            gateway: ${gateway}
-    nameservers:
-      - ${nameserver}
+        dhcp: true
   
   install:
     disk: /dev/sda

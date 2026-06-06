@@ -5,10 +5,7 @@ resource "local_file" "control_plane_config" {
   
   content = templatefile("${path.module}/templates/controlplane.yaml.tpl", {
     hostname         = "talos-cp-${format("%02d", count.index + 1)}"
-    ip_address       = var.control_plane_ips[count.index]
-    gateway          = var.gateway
-    nameserver       = var.nameserver
-    cluster_endpoint = "https://${var.control_plane_ips[0]}:6443"
+    cluster_endpoint = var.cluster_endpoint
     cluster_name     = "homelab"
   })
 }
@@ -45,10 +42,7 @@ resource "local_file" "worker_config" {
   
   content = templatefile("${path.module}/templates/worker.yaml.tpl", {
     hostname         = "talos-worker-${format("%02d", count.index + 1)}"
-    ip_address       = var.worker_ips[count.index]
-    gateway          = var.gateway
-    nameserver       = var.nameserver
-    cluster_endpoint = "https://${var.control_plane_ips[0]}:6443"
+    cluster_endpoint = var.cluster_endpoint
     cluster_name     = "homelab"
   })
 }
