@@ -29,18 +29,21 @@ variable "disk_size" {
 }
 
 variable "ip_address" {
-  description = "Static IP address for the VM"
+  description = "Static IP address for the VM (unused with DHCP)"
   type        = string
+  default     = ""
 }
 
 variable "gateway" {
-  description = "Network gateway"
+  description = "Network gateway (unused with DHCP)"
   type        = string
+  default     = ""
 }
 
 variable "nameserver" {
-  description = "DNS nameserver"
+  description = "DNS nameserver (unused with DHCP)"
   type        = string
+  default     = ""
 }
 
 variable "iso_file" {

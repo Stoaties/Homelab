@@ -13,25 +13,7 @@ variable "proxmox_api_token" {
 variable "proxmox_node" {
   description = "Proxmox node name to deploy VMs on"
   type        = string
-  default     = "pve"  # Update with your node name
-}
-
-variable "gateway" {
-  description = "Network gateway IP"
-  type        = string
-  default     = "10.0.0.1"
-}
-
-variable "subnet_mask" {
-  description = "Network subnet mask (CIDR bits)"
-  type        = number
-  default     = 16
-}
-
-variable "nameserver" {
-  description = "DNS nameserver"
-  type        = string
-  default     = "10.0.0.1"  # Or your preferred DNS (1.1.1.1, 8.8.8.8)
+  default     = "pve"
 }
 
 variable "talos_iso_path" {
@@ -71,12 +53,6 @@ variable "control_plane_disk_size" {
   default     = 50
 }
 
-variable "control_plane_ips" {
-  description = "IP addresses for control plane nodes"
-  type        = list(string)
-  default     = ["10.0.1.101", "10.0.1.102", "10.0.1.103"]
-}
-
 # Worker Configuration
 variable "worker_count" {
   description = "Number of worker nodes"
@@ -102,12 +78,6 @@ variable "worker_disk_size" {
   default     = 100
 }
 
-variable "worker_ips" {
-  description = "IP addresses for worker nodes"
-  type        = list(string)
-  default     = ["10.0.1.201", "10.0.1.202"]
-}
-
 variable "network_bridge" {
   description = "Network bridge on Proxmox"
   type        = string
@@ -115,13 +85,13 @@ variable "network_bridge" {
 }
 
 variable "vlan_tag" {
-  description = "VLAN tag (optional)"
+  description = "VLAN tag (optional, -1 means no VLAN)"
   type        = number
-  default     = -1  # -1 means no VLAN
+  default     = -1
 }
 
 variable "cluster_endpoint" {
-  description = "Kubernetes API server endpoint (use first control plane DHCP IP after deployment)"
+  description = "Kubernetes API endpoint - set to the first control plane's DHCP IP after first boot"
   type        = string
-  default     = "https://10.0.0.185:6443"  # Update with actual first control plane IP after deployment
+  default     = "https://10.0.0.185:6443"
 }
