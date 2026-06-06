@@ -40,6 +40,9 @@ resource "proxmox_virtual_environment_vm" "talos_vm" {
 
   bios = "ovmf"
 
+  # Boot from disk first, ISO as fallback for initial install only
+  boot_order = ["scsi0", "ide2"]
+
   # REMOVED: initialization block - Talos doesn't use cloud-init
   # Network configuration must be done via Talos config files
   # See talos/scripts/generate-configs.sh
@@ -52,6 +55,7 @@ resource "proxmox_virtual_environment_vm" "talos_vm" {
   lifecycle {
     ignore_changes = [
       cdrom,
+      boot_order,
     ]
   }
 }
